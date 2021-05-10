@@ -7,7 +7,7 @@ import java.util.Map;
  * @author drone
  * @date 2021/5/9
  */
-public class Q56 {
+public class Q56_2 {
     public int singleNumber(int[] nums) {
         Map<Integer,Integer> map=new HashMap<>();
         for(int num:nums){
