@@ -4,12 +4,15 @@ import java.util.PriorityQueue;
 
 public class Test1 {
     public static void main(String[] args) {
-        int[][] test = new int[10][10];
-        int min = Math.min(1, 2);
+     int a=10;
+     int b=7;
 
-        ArrayList<Object> objects = new ArrayList<>();
+     a ^=b;
+     b ^=a;
+     a ^=b;
 
-        PriorityQueue<Integer> objects1 = new PriorityQueue<>((o1, o2) -> o1-o2);
+        System.out.println(a);
+        System.out.println(b);
 
     }
 }
