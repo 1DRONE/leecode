@@ -19,7 +19,9 @@ public class TestSort {
         //递归
         //MergeSort.sort(array);
         //快排
-        QuickSort.sort(array);
+        //QuickSort.sort(array);
+        //堆
+        HeapSort.sort(array);
 
         System.out.println("排序后："+Arrays.toString(array));
     }

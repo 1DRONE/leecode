@@ -45,6 +45,8 @@ public class HeapSort {
 
     /**
      * 堆化
+     * 从后往前处理数组，并且每个数据都是从上往下堆化
+     *
      *
      * @param arr 要堆化的数组
      * @param n   最后堆元素下标
