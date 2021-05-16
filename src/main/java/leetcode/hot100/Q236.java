@@ -1,12 +1,12 @@
-package so;
+package leetcode.hot100;
 
 import leetcode.data.TreeNode;
 
 /**
  * @author drone
- * @date 2021/5/9
+ * @date 2021/5/17
  */
-public class Q68_2 {
+public class Q236 {
     private TreeNode ans;
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
