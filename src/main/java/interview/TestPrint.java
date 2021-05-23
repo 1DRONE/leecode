@@ -1,6 +1,7 @@
 package interview;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -10,8 +11,6 @@ import java.util.Objects;
  * @date 2021/5/14
  */
 public class TestPrint {
-    private static final int limit = 10;
-
     public static void main(String[] args) {
         MajusculeABC maj = new MajusculeABC();
         //Thread(Runnable target)
@@ -24,63 +23,62 @@ public class TestPrint {
     }
 
     static class MajusculeABC {
-        LinkedList<Character> list = new LinkedList<>();
-        int idx = 0;
-        //打印最大次数
-        int loopCountMax = 10;
-        //当前打印次数
-        int currentLoop = 0;
+        private List<Character> charList = new ArrayList<>();
+        private int cuurentIndex = 0;
+        private int countLimit = 10;
+        private int currentCount = 0;
 
         public Character currentChar() {
-            int i = idx % list.size();
-            int c = idx / list.size();
-            if (i == 0 && idx != 0) {
-                currentLoop += c;
-                idx = 0;
-                if (currentLoop >= loopCountMax) {
-                    currentLoop = -1;
-                    System.out.println();
+            int i = cuurentIndex % charList.size();
+            int c = cuurentIndex / charList.size();
+            if (i == 0 && c != 0) {
+                currentCount++;
+                cuurentIndex = 0;
+                if (currentCount >= countLimit) {
+                    currentCount = -1;
                     return null;
                 }
                 System.out.println();
             }
-            return list.get(i);
+            return charList.get(i);
         }
 
-        public void add(Character character) {
-            list.add(character);
+        public void addChar(char character) {
+            charList.add(character);
         }
+
     }
 
     static class Thread_ABC implements Runnable {
-        MajusculeABC maj;
-        Character c;
+
+        private MajusculeABC maj;
+        private char c;
 
         public Thread_ABC(MajusculeABC maj, char c) {
-            maj.add(c);
+            maj.addChar(c);
             this.maj = maj;
             this.c = c;
         }
+
 
         @Override
         public void run() {
             while (true) {
                 synchronized (maj) {
-                    if (maj.currentLoop < 0) {
+                    if (maj.currentCount < 0) {
                         maj.notifyAll();
+                        System.out.println();
                         break;
-                    } else {
-                        if (Objects.equals(maj.currentChar(), this.c)) {
-                            System.out.print(c);
-                            maj.idx++;
-                        }
-                        try {
-                            //maj.wait();
-                            maj.notifyAll();
-                            maj.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                    }
+                    if (Objects.equals(maj.currentChar(), this.c)) {
+                        System.out.print(c);
+                        maj.cuurentIndex++;
+                    }
+                    try {
+                        maj.notifyAll();
+                        maj.wait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
